@@ -17,6 +17,16 @@
 # under the License.
 #
 
+github:
+  description: "Apache TsFile Website"
+  homepage: https://tsfile.apache.org/
+  features:
+    issues: true
+
+notifications:
+  commits: commits@tsfile.apache.org
+  issues: dev@tsfile.apache.org
+
 staging:
   profile: ~
   whoami:  asf-staging
