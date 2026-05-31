@@ -9,86 +9,35 @@
       <head>
         <title>XML Sitemap</title>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0;" />
-        <style>
-          :root {
-            --bg-color: #f8f8f8;
-            --bg-color-secondary: #fff;
-            --text-color: #2c3e50;
-            --border-color: #eaecef;
-            --brand-color: #3eaf7c;
-
-            color-scheme: light dark;
-          }
-
-          @media (prefers-color-scheme: dark) {
-            :root {
-              --bg-color: #0d1117;
-              --bg-color-secondary: #161b22;
-              --text-color: #ccc;
-              --border-color: #30363d;
-            }
-          }
-
-          html,
+        <style type="text/css">
           body {
-            margin: 0;
-            padding: 0;
-            background: var(--bg-color);
-          }
-
-          html {
             font-size: 14px;
           }
 
-          body {
-            min-height: 100vh;
-            color: var(--text-color);
-            text-align: center;
-          }
-
-          #content {
-            max-width: 960px;
-            margin: 0 auto;
-          }
-
-          h1 {
-            margin-top: 1rem;
-            font-size: 2rem;
-          }
-
-          @media (max-width: 419px) {
-            h1 {
-              font-size: 1.5rem;
-            }
-          }
-
           a {
-            color: var(--text-color);
-            font-weight: 500;
-            overflow-wrap: break-word;
+            color: inherit;
           }
 
           table {
             width: 100%;
             border-radius: 8px;
             border-collapse: collapse;
-            text-align: center;
             overflow: hidden;
+            text-align: center;
           }
 
-          @media (max-width: 419px) {
-            table {
-              border-radius: 0;
-            }
+          caption {
+            font-weight: bold;
+            font-size: 1.5rem;
+            line-height: 2;
           }
 
           th {
             min-width: 56px;
-            padding: 0.6em 1em;
+            padding: 8px;
 
-            background-color: var(--brand-color);
-            color: var(--bg-color);
+            background-color: #41b883;
+            color: #fff;
 
             font-weight: bold;
             font-size: 16px;
@@ -104,22 +53,17 @@
             text-align: start;
           }
 
-          tr:nth-child(odd) {
-            background: var(--bg-color-secondary);
+          tr:nth-child(even) {
+            background-color: #f2f2f2;
           }
 
           tr:hover {
             background-color: #e8e8e8;
           }
 
-          @media (prefers-color-scheme: dark) {
-            tr:hover {
-              background-color: #333;
-            }
-          }
-
           td {
-            padding: 0.6em 1em;
+            padding: 4px;
+            font-size: 14px;
           }
 
           @media (max-width: 719px) {
@@ -136,7 +80,7 @@
             margin-top: 10px;
             padding: 4px;
 
-            color: #888;
+            color: grey;
 
             font-size: 12px;
             text-align: center;
@@ -144,9 +88,10 @@
         </style>
       </head>
       <body>
+        <h1>XML Sitemap</h1>
         <div id="content">
-          <h1>Sitemap</h1>
           <table>
+            <caption>URLs list</caption>
             <thead>
               <tr>
                 <th>
@@ -166,7 +111,7 @@
                     <xsl:variable name="itemURL">
                       <xsl:value-of select="sitemap:loc" />
                     </xsl:variable>
-                    <a href="{$itemURL}" target="_blank">
+                    <a href="{$itemURL}">
                       <xsl:value-of select="sitemap:loc" />
                     </a>
                   </td>
@@ -199,7 +144,7 @@
           </table>
         </div>
         <footer>
-          Generatd by <a href="https://ecosystem.vuejs.press/plugins/sitemap/">@vuepress/plugin-sitemap</a>
+          Generatd by <a href="https://plugin-sitemap2.vuejs.press">vuepress-plugin-sitemap2</a>
         </footer>
       </body>
     </html>

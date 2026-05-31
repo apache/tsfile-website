@@ -1,0 +1,1 @@
+import{_ as o,r as t,o as n,b as a,f as c}from"./app-CoR__Wsn.js";const r={};function _(s,l){const e=t("AutoCatalog");return n(),a("div",null,[c(e)])}const m=o(r,[["render",_],["__file","index.html.vue"]]);export{m as default};
