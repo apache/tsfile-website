@@ -1,0 +1,179 @@
+import{_ as n,o as i,c as a,a as l,f as d}from"./app-xXgWGijP.js";const s={};function r(t,e){return i(),a("div",null,[l(`
+
+    Licensed to the Apache Software Foundation (ASF) under one
+    or more contributor license agreements.  See the NOTICE file
+    distributed with this work for additional information
+    regarding copyright ownership.  The ASF licenses this file
+    to you under the Apache License, Version 2.0 (the
+    "License"); you may not use this file except in compliance
+    with the License.  You may obtain a copy of the License at
+    
+        http://www.apache.org/licenses/LICENSE-2.0
+    
+    Unless required by applicable law or agreed to in writing,
+    software distributed under the License is distributed on an
+    "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+    KIND, either express or implied.  See the License for the
+    specific language governing permissions and limitations
+    under the License.
+
+`),e[0]||(e[0]=d(`<h1 id="interface-definitions" tabindex="-1"><a class="header-anchor" href="#interface-definitions" aria-hidden="true">#</a> Interface Definitions</h1><h2 id="write-interface" tabindex="-1"><a class="header-anchor" href="#write-interface" aria-hidden="true">#</a> Write Interface</h2><h3 id="itsfilewriter" tabindex="-1"><a class="header-anchor" href="#itsfilewriter" aria-hidden="true">#</a> ITsFileWriter</h3><p>Used to write data to tsfile</p><div class="language-Java line-numbers-mode" data-ext="Java"><pre class="language-Java"><code>interface ITsFileWriter extends AutoCloseable {
+  // Write data
+  void write(Tablet tablet);
+  
+  // Close Write
+  void close();
+}
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h3 id="tsfilewriterbuilder" tabindex="-1"><a class="header-anchor" href="#tsfilewriterbuilder" aria-hidden="true">#</a> TsFileWriterBuilder</h3><p>Used to construct ITsFileWriter</p><div class="language-Java line-numbers-mode" data-ext="Java"><pre class="language-Java"><code>class TsFileWriterBuilder {
+  // Build ITsFileWriter object
+  public ITsFileWriter build();
+  
+  // target file
+  public TsFileWriterBuilder file(File file);
+  
+  // Used to construct table structures
+  public TsFileWriterBuilder tableSchema(TableSchema schema);
+  
+  // Used to limit the memory size of objects
+  public TsFileWriterBuilder memoryThreshold(long memoryThreshold);
+}
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h3 id="tableschema" tabindex="-1"><a class="header-anchor" href="#tableschema" aria-hidden="true">#</a> TableSchema</h3><p>Describe the data structure of the table schema</p><div class="language-Java line-numbers-mode" data-ext="Java"><pre class="language-Java"><code>class TableSchema {
+  // Constructor function
+  public TableSchema(String tableName, List&lt;ColumnSchema&gt; columnSchemaList);
+}
+
+class ColumnSchema {
+  // Constructor function
+  public ColumnSchema(String columnName, TSDataType dataType, ColumnCategory columnCategory);
+  
+  // Get column names
+  public String getColumnName();
+  
+  // Get the data type of the column
+  public TSDataType getDataType();
+  
+  // Get column category
+  public Tablet.ColumnCategory getColumnCategory();
+}
+
+class ColumnSchemaBuilder {
+  // Build ColumnSchema object
+  public ColumnSchema build();
+  
+  // Column Name
+  public ColumnSchemaBuilder name(String columnName);
+  
+  // The data type of the column
+  public ColumnSchemaBuilder dataType(TSDataType columnType);
+  
+  // Column category
+  public ColumnSchemaBuilder category(ColumnCategory columnCategory);
+  
+  // Supported types
+  enum TSDataType {    
+    BOOLEAN,    
+    INT32,
+    INT64,    
+    FLOAT,    
+    DOUBLE,    
+    TIMESTAMP,   
+    TEXT,    
+    DATE,    
+    BLOB,   
+    STRING;  
+  }
+  
+  // Supported column categories
+  enum ColumnCategory {    
+    TAG,   
+    FIELD 
+  }
+}
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h3 id="tablet" tabindex="-1"><a class="header-anchor" href="#tablet" aria-hidden="true">#</a> Tablet</h3><p>Write column memory structure</p><div class="language-Java line-numbers-mode" data-ext="Java"><pre class="language-Java"><code>class Tablet {
+  // Constructor function
+  public Tablet(List&lt;String&gt; columnNameList, List&lt;TSDataType&gt; dataTypeList);
+  public Tablet(List&lt;String&gt; columnNameList, List&lt;TSDataType&gt; dataTypeList, int maxRowNum);
+  
+  // Interface for adding timestamps
+  void addTimestamp(int rowIndex, long timestamp);
+  
+  // Interface for adding values
+  // Add values based on column names
+  void addValue(int rowIndex, String columnName, int val);
+  void addValue(int rowIndex, String columnName, long val);  
+  void addValue(int rowIndex, String columnName, float val);  
+  void addValue(int rowIndex, String columnName, double val);  
+  void addValue(int rowIndex, String columnName, boolean val);  
+  void addValue(int rowIndex, String columnName, String val);
+  void addValue(int rowIndex, String columnName, byte[] val); 
+  void addValue(int rowIndex, String columnName, LocalDate val); 
+  // Add values based on index position
+  void addValue(int rowIndex, int columnIndex, int val);
+  void addValue(int rowIndex, int columnIndex, long val);  
+  void addValue(int rowIndex, int columnIndex, float val);  
+  void addValue(int rowIndex, int columnIndex, double val);  
+  void addValue(int rowIndex, int columnIndex, boolean val); 
+  void addValue(int rowIndex, int columnIndex, String val);
+  void addValue(int rowIndex, int columnIndex, byte[] val); 
+  void addValue(int rowIndex, int columnIndex, LocalDate val);
+}
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h2 id="read-interface" tabindex="-1"><a class="header-anchor" href="#read-interface" aria-hidden="true">#</a> Read Interface</h2><h3 id="itsfilereader" tabindex="-1"><a class="header-anchor" href="#itsfilereader" aria-hidden="true">#</a> ITsFileReader</h3><p>Used to query data in tsfile</p><div class="language-Java line-numbers-mode" data-ext="Java"><pre class="language-Java"><code>interface ITsFileReader extends AutoCloseable {
+  // Used to execute queries and return results
+  ResultSet query(String tableName, List&lt;String&gt; columnNames, long startTime, long endTime);
+  
+  // Return the schema of the table named tableName in tsfile
+  Optional&lt;TableSchema&gt; getTableSchemas(String tableName);
+  
+  // Retrieve schema information for all tables in the tsfile
+  List&lt;TableSchema&gt; getAllTableSchema();
+  
+  // Close query
+  void close();
+}
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h3 id="tsfilereaderbuilder" tabindex="-1"><a class="header-anchor" href="#tsfilereaderbuilder" aria-hidden="true">#</a> TsFileReaderBuilder</h3><p>Used to construct ITsFileWriter</p><div class="language-Java line-numbers-mode" data-ext="Java"><pre class="language-Java"><code>class TsFileReaderBuilder {
+  // Build ITsFileReader object
+  public ITsFileReader build();
+  
+  // target file
+  public TsFileReaderBuilder file(File file);
+}
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h3 id="resultset" tabindex="-1"><a class="header-anchor" href="#resultset" aria-hidden="true">#</a> ResultSet</h3><p>The result set of the query</p><div class="language-Java line-numbers-mode" data-ext="Java"><pre class="language-Java"><code>interface ResultSet extends AutoCloseable {  
+  // Move the cursor to the next row and return whether there is still data
+  boolean next();  
+    
+  // Get the value of the current row and a certain column
+  int getInt(String columnName);  
+  int getInt(int columnIndex);  
+  long getLong(String columnName);  
+  long getLong(int columnIndex);
+  float getFloat(String columnName);
+  float getFloat(int columnIndex); 
+  double getDouble(String columnName);
+  double getDouble(int columnIndex); 
+  boolean getBoolean(String columnName);
+  boolean getBoolean(int columnIndex);
+  String getString(String columnName);
+  String getString(int columnIndex);
+  LocalDate getDate(String columnName);
+  LocalDate getDate(int columnIndex); 
+  byte[] getBinary(String columnName);
+  byte[] getBinary(int columnIndex);
+     
+  // Determine whether a column is NULL in the current row
+  boolean isNull(String columnName);  
+  boolean isNull(int columnIndex);  
+    
+  // Close the current structure set
+  void close();
+    
+  // Obtain the header of the result set
+  ResultSetMetadata getMetadata();
+}
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h3 id="resultsetmetadata" tabindex="-1"><a class="header-anchor" href="#resultsetmetadata" aria-hidden="true">#</a> ResultSetMetadata</h3><p>Used to obtain metadata for the result set</p><div class="language-Java line-numbers-mode" data-ext="Java"><pre class="language-Java"><code>interface ResultSetMetadata {  
+  // Obtain the column name of the Nth column in the result set
+  String getColumnName(int columnIndex);
+  
+  // Obtain the data type of the Nth column in the result set
+  TSDataType getColumnType(int columnIndex);
+}
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div>`,27))])}const v=n(s,[["render",r],["__file","Interface-Definitions.html.vue"]]);export{v as default};
